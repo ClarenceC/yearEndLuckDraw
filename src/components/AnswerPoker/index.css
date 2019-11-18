@@ -1,0 +1,26 @@
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.answer-container{
+  position: absolute;
+  top: 30px;
+  left: 300px;
+  width: 400px;
+  height: 600px;
+  background-color: lightblue;
+  animation-name: zoomIn;
+  animation-duration: 2s;
+  line-height: 260px;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+}

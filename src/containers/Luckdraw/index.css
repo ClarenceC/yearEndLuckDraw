@@ -1,0 +1,14 @@
+.luckdraw-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.draw-btn {
+  width: 100px;
+  height: 50px;
+  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

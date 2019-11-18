@@ -1,0 +1,42 @@
+.poker-panle {
+  position: relative;
+  width: 1000px;
+  /* height: 634px; */
+  background: url('../../assets/images/App/panle.jpg') no-repeat;
+  background-size: 1000px 700px;
+  z-index: 1;
+}
+.poker-panle-header {
+  display: flex;
+  justify-content: flex-end;
+}
+.close-btn {
+  text-align: right;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.poker-panle-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0,0,15, 0.4);
+  z-index: 1;
+  touch-action: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.poker-rowList {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
