@@ -6,11 +6,13 @@ import './index.css'
 
 interface PokerPanleProps {
   closePanle: ()=>void,
+  openLuck: (id: number) => void,
   waitOpenLuckPeoples: Array<LuckParamsTypes>
 }
 
 interface PokerPanleStates {
   isShowAnswerPoker: boolean,
+  frontPic: string,
   answerPic: string
 }
 
@@ -19,12 +21,13 @@ class PokerPanle extends PureComponent<PokerPanleProps, PokerPanleStates> {
     super(props)
     this.state = {
       isShowAnswerPoker: false,
-      answerPic: ''
+      frontPic: '',
+      answerPic: '',
     }
   }
 
   handleWaitOpenList = () => {
-    const { waitOpenLuckPeoples } = this.props
+    const { waitOpenLuckPeoples, openLuck } = this.props
     const rowOpenList:Array<any> = []
     let rowOpenIndex = 0
     waitOpenLuckPeoples.forEach((item, index) => {
@@ -42,7 +45,7 @@ class PokerPanle extends PureComponent<PokerPanleProps, PokerPanleStates> {
           return (
             <div key={rowIndex} className='poker-rowList'>
               { rowListItem.map((poker:LuckParamsTypes, index:number) => (
-                <Poker key={index} poker={poker} showAnswerPoker={this.showAnswerPoker}/>
+                <Poker key={index} poker={poker} showAnswerPoker={this.showAnswerPoker} openLuck={openLuck}/>
               )) }
             </div>
           )
@@ -51,9 +54,12 @@ class PokerPanle extends PureComponent<PokerPanleProps, PokerPanleStates> {
     )
   }
 
-  showAnswerPoker = (answerPic:string) => {
-    this.setState({ isShowAnswerPoker: true })
-    this.setState({ answerPic })
+  showAnswerPoker = (frontPic: string, answerPic:string) => {
+    this.setState({ 
+      isShowAnswerPoker: true,
+      answerPic,
+      frontPic,
+    })
   }
 
   closeAnswerPoker = () => {
@@ -62,7 +68,7 @@ class PokerPanle extends PureComponent<PokerPanleProps, PokerPanleStates> {
 
   render() {
     const { closePanle } = this.props
-    const { isShowAnswerPoker, answerPic } = this.state
+    const { isShowAnswerPoker, frontPic, answerPic } = this.state
     return(
         <div className='poker-panle-mask'>
           <div className='poker-panle'>
@@ -70,7 +76,7 @@ class PokerPanle extends PureComponent<PokerPanleProps, PokerPanleStates> {
             <div className='poker-content'>
               {this.handleWaitOpenList()}
             </div>
-            { isShowAnswerPoker && <AnswerPoker answerPic={answerPic} closeAnswerPoker={this.closeAnswerPoker}/> }
+            { isShowAnswerPoker && <AnswerPoker frontPic={frontPic} answerPic={answerPic} closeAnswerPoker={this.closeAnswerPoker}/> }
           </div>
         </div>
     )

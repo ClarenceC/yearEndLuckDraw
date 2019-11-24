@@ -4,7 +4,8 @@ import './index.css'
 
 interface PokerPropsType {
   poker: LuckParamsTypes,
-  showAnswerPoker: (answer:string) => void
+  showAnswerPoker: (frontPic:string, answer:string) => void,
+  openLuck: (id: number) => void,
 }
 
 interface PokerStateType {
@@ -19,13 +20,18 @@ class Poker extends PureComponent<PokerPropsType, PokerStateType> {
     }
   }
 
-  openPoker = (id:number) => {
+  openPoker = (poker: LuckParamsTypes) => {
+    const { luckNum, frontPic, frontAnswer } = poker
+    const { openLuck } = this.props
     this.setState({ isOpened: true })
-    console.log(id)
+    openLuck(luckNum)
+    setTimeout(() => {
+      this.zoomIn(frontPic, frontAnswer)
+    }, 1000)
   }
 
-  zoomIn = (answer: string)  => {
-    this.props.showAnswerPoker(answer)
+  zoomIn = (frontPic: string, answer: string)  => {
+    this.props.showAnswerPoker(frontPic, answer)
   }
 
   render() {
@@ -33,7 +39,7 @@ class Poker extends PureComponent<PokerPropsType, PokerStateType> {
     const { poker } = this.props  
     return (
       <div className='wrapper'>
-        <div className={isOpened ? 'card active' : 'card'} onClick={() => {isOpened ? this.zoomIn(poker.frontAnswer) : this.openPoker(poker.luckNum)}}>
+        <div className={isOpened ? 'card active' : 'card'} onClick={() => {this.openPoker(poker)}}>
           <div className='card-face card-front'>{poker.backPic}</div>
           <div className='card-face card-back'>{poker.frontPic}</div>
         </div>

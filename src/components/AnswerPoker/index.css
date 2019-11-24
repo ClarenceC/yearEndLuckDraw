@@ -15,12 +15,13 @@
   left: 300px;
   width: 400px;
   height: 600px;
-  background-color: lightblue;
+  /* background-color: lightblue; */
   animation-name: zoomIn;
   animation-duration: 2s;
   line-height: 260px;
-  color: #fff;
+  /* color: #fff; */
   text-align: center;
   font-weight: bold;
   font-size: 40px;
+  perspective: 600px;
 }

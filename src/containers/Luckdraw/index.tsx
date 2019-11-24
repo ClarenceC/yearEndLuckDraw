@@ -47,7 +47,12 @@ class Luckdraw extends PureComponent<LuckdrawPropTypes, LuckdrawStateType> {
   }
 
   openLuck = (id: number) => {
-    
+    const { luckNumArray } = this.state
+    luckNumArray.forEach(item => {
+      if (item.luckNum === id) {
+        item.isOpened = true
+      }
+    })
   }
 
   showLuckPanle = () => {
@@ -62,14 +67,13 @@ class Luckdraw extends PureComponent<LuckdrawPropTypes, LuckdrawStateType> {
     const { luckNumArray } = this.state
     const notDrawnPeopleArray = luckNumArray.filter(luckPeople => luckPeople.isOpened === false)
     const notDrawnTotal = notDrawnPeopleArray.length
-    const randomArray = [
-      this.randomDraw(0, notDrawnTotal),
-      this.randomDraw(0, notDrawnTotal),
-      this.randomDraw(0, notDrawnTotal),
-      this.randomDraw(0, notDrawnTotal),
-      this.randomDraw(0, notDrawnTotal),
-      this.randomDraw(0, notDrawnTotal),
-    ]
+    const randomArray = []
+    while(randomArray.length !== 6) {
+      const randomNum = this.randomDraw(0, notDrawnTotal)
+      if (randomArray.findIndex(element => element === randomNum ) === -1) {
+        randomArray.push(randomNum)
+      }
+    }
     console.log('randomArray:', randomArray)
     const waitOpen = randomArray.map(item => notDrawnPeopleArray[item])
     console.log('onDraw', notDrawnTotal)
@@ -81,7 +85,7 @@ class Luckdraw extends PureComponent<LuckdrawPropTypes, LuckdrawStateType> {
     const { showLuckPeoplePanle, waitOpenArray } = this.state
     return (
       <div className='luckdraw-container'>
-        { showLuckPeoplePanle && <PokerPanle closePanle={this.closeLuckPanle} waitOpenLuckPeoples={waitOpenArray}/>}
+        { showLuckPeoplePanle && <PokerPanle openLuck={this.openLuck} closePanle={this.closeLuckPanle} waitOpenLuckPeoples={waitOpenArray}/>}
         <div className='draw-btn' onClick={this.onDraw}>抽奖</div>
       </div>
     )
