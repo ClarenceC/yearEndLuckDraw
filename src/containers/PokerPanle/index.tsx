@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import Poker from '@/components/Poker'
 import { LuckParamsTypes } from '@/containers/Luckdraw'
 import AnswerPoker from '@/components/AnswerPoker'
-import './index.css'
+import styles from './index.css'
 
 interface PokerPanleProps {
   closePanle: ()=>void,
@@ -12,7 +12,7 @@ interface PokerPanleProps {
 
 interface PokerPanleStates {
   isShowAnswerPoker: boolean,
-  frontPic: string,
+  frontBigerPic: string,
   answerPic: string
 }
 
@@ -21,7 +21,7 @@ class PokerPanle extends PureComponent<PokerPanleProps, PokerPanleStates> {
     super(props)
     this.state = {
       isShowAnswerPoker: false,
-      frontPic: '',
+      frontBigerPic: '',
       answerPic: '',
     }
   }
@@ -37,13 +37,13 @@ class PokerPanle extends PureComponent<PokerPanleProps, PokerPanleStates> {
       if (!rowOpenList[rowOpenIndex]) {
         rowOpenList[rowOpenIndex] = []
       }
-      rowOpenList[rowOpenIndex].push(item)
+      rowOpenList[rowOpenIndex].push({ ...item, id: index + 1})
     })
     return (
       <>{
         rowOpenList.map((rowListItem, rowIndex) => {
           return (
-            <div key={rowIndex} className='poker-rowList'>
+            <div key={rowIndex} className={styles['poker-rowList']}>
               { rowListItem.map((poker:LuckParamsTypes, index:number) => (
                 <Poker key={index} poker={poker} showAnswerPoker={this.showAnswerPoker} openLuck={openLuck}/>
               )) }
@@ -54,11 +54,11 @@ class PokerPanle extends PureComponent<PokerPanleProps, PokerPanleStates> {
     )
   }
 
-  showAnswerPoker = (frontPic: string, answerPic:string) => {
+  showAnswerPoker = (frontBigerPic: string, answerPic:string) => {
     this.setState({ 
       isShowAnswerPoker: true,
       answerPic,
-      frontPic,
+      frontBigerPic,
     })
   }
 
@@ -68,15 +68,15 @@ class PokerPanle extends PureComponent<PokerPanleProps, PokerPanleStates> {
 
   render() {
     const { closePanle } = this.props
-    const { isShowAnswerPoker, frontPic, answerPic } = this.state
+    const { isShowAnswerPoker, frontBigerPic, answerPic } = this.state
     return(
-        <div className='poker-panle-mask'>
-          <div className='poker-panle'>
-            <div className='poker-panle-header'><div className='close-btn' onClick={closePanle}>X</div></div>
-            <div className='poker-content'>
+        <div className={styles['poker-panle-mask']}>
+          <div className={styles['poker-panle']}>
+            <div className={styles['poker-panle-header']}><div className={styles['close-btn']} onClick={closePanle}>X</div></div>
+            <div className={styles['poker-content']}>
               {this.handleWaitOpenList()}
             </div>
-            { isShowAnswerPoker && <AnswerPoker frontPic={frontPic} answerPic={answerPic} closeAnswerPoker={this.closeAnswerPoker}/> }
+            { isShowAnswerPoker && <AnswerPoker frontBigerPic={frontBigerPic} answerPic={answerPic} closeAnswerPoker={this.closeAnswerPoker}/> }
           </div>
         </div>
     )

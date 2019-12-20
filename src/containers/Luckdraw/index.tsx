@@ -1,14 +1,16 @@
 import React, { PureComponent } from 'react'
 import PokerPanle from '@/containers/PokerPanle'
 
-import './index.css'
+import styles from './index.css'
 
 export interface LuckParamsTypes {
   luckNum: number,
   backPic: string,
   frontPic: string,
+  frontBigerPic: string,
   frontAnswer: string,
   isOpened: boolean,
+  id: number,
 }
 
 interface LuckdrawPropTypes {}
@@ -32,18 +34,29 @@ class Luckdraw extends PureComponent<LuckdrawPropTypes, LuckdrawStateType> {
   }
 
   componentDidMount() {
+    const images = this.importAll(require.context('../../assets/images/Poker/Front/Confused/', false, /\.(gif|png|jpe?g|svg)$/))
+    const imagesBiger = this.importAll(require.context('../../assets/images/Poker/Front/ConfusedBiger/', false, /\.(gif|png|jpe?g|svg)$/))
+    const imagesPuzzle = this.importAll(require.context('../../assets/images/Poker/Front/Puzzle/', false, /\.(gif|png|jpe?g|svg)$/))
     const luckPeopleArray:Array<LuckParamsTypes> = Array.from({length: 120}, (item, index:number) => ({
       luckNum: index,
       backPic: "反",
-      frontPic: "正"+index,
-      frontAnswer: "Answer"+index,
+      frontPic: images[`${index}.png`],
+      frontBigerPic: imagesBiger[`${index}.png`],
+      frontAnswer: index < 10 ? imagesPuzzle[`qianzi_0${index}.png`] : imagesPuzzle[`qianzi_${index}.png`],
       isOpened: false,
+      id: 0,
     }))
     this.setState({ luckNumArray: luckPeopleArray })
   }
 
   randomDraw = (minNum:number, maxNum:number):number => {
     return Math.floor(Math.random() * (maxNum - minNum) + minNum)
+  }
+
+  importAll = (r:any):any => {
+    let images:{[index: string]:any} = {};
+    r.keys().map((item:string, index:number) => { images[item.replace('./', '')] = r(item) });
+    return images;
   }
 
   openLuck = (id: number) => {
@@ -83,10 +96,11 @@ class Luckdraw extends PureComponent<LuckdrawPropTypes, LuckdrawStateType> {
 
   render() {
     const { showLuckPeoplePanle, waitOpenArray } = this.state
+    // console.log(require.context('../../assets/images/Poker/Front/Confused/', false, /\.(gif|png|jpe?g|svg)$/))
     return (
-      <div className='luckdraw-container'>
+      <div className={styles['luckdraw-container']}>
         { showLuckPeoplePanle && <PokerPanle openLuck={this.openLuck} closePanle={this.closeLuckPanle} waitOpenLuckPeoples={waitOpenArray}/>}
-        <div className='draw-btn' onClick={this.onDraw}>抽奖</div>
+        <div className={styles['draw-btn']} onClick={this.onDraw}></div>
       </div>
     )
   }

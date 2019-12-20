@@ -5,10 +5,9 @@
   align-items: center;
 }
 .draw-btn {
-  width: 100px;
-  height: 50px;
-  background-color: lightblue;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-top: 300px;
+  width: 150px;
+  height: 150px;
+  background: url('../../../src/assets/images/App/drawButton.png') no-repeat;
+  background-size: 100% 100%;
 }

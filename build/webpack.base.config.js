@@ -31,14 +31,37 @@ module.exports = {
         options: { presets: ["@babel/env"] }
       },
       {
-        test: /\.css$/,
-        use: ["style-loader",  "css-loader"]
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 1024,
+              name: 'images/[name]_[hash:7].[ext]'
+            }
+          }
+        ],
+        exclude: /node_modules/
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [{ loader: 'file-loader' }],
-        exclude: /node_modules/
-      }
+        test: /\.css$/,
+        use: [
+          {
+            loader: "style-loader",
+          }, {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              },
+            }
+          }]
+      },
+      // {
+      //   test: /\.(png|svg|jpg|gif)$/,
+      //   use: [{ loader: 'file-loader' }],
+      //   exclude: /node_modules/
+      // }
     ]
   },
   plugins: [

@@ -1,6 +1,4 @@
 .wrapper {
-  /* margin: 100px auto; */
-  /* border: 1px solid #ccc; */
   width: 200px;
   height: 300px;
   perspective: 600px;
@@ -30,7 +28,47 @@
 .card-face.card-front {
   background-color: #f00;
 }
+
 .card-face.card-back {
-  background-color: #4577dc;
+  /* background-color: #4577dc; */
   transform: rotateY(180deg);
 }
+
+.card-face.card-front1 {
+  width: 200px;
+  height: 300px;
+  background: url('../../../src/assets/images/Poker/Back/back1.png') no-repeat center;
+}
+
+.card-face.card-front2 {
+  width: 200px;
+  height: 300px;
+  background: url('../../../src/assets/images/Poker/Back/back2.png') no-repeat center;
+}
+
+.card-face.card-front3 {
+  width: 200px;
+  height: 300px;
+  background: url('../../../src/assets/images/Poker/Back/back3.png') no-repeat center;
+}
+
+.card-face.card-front4 {
+  width: 200px;
+  height: 300px;
+  background: url('../../../src/assets/images/Poker/Back/back4.png') no-repeat center;
+}
+
+.card-face.card-front5 {
+  width: 200px;
+  height: 300px;
+  background: url('../../../src/assets/images/Poker/Back/back5.png') no-repeat center;
+}
+
+.card-face.card-front6 {
+  width: 200px;
+  height: 300px;
+  background: url('../../../src/assets/images/Poker/Back/back6.png') no-repeat center;
+}
+
+
+

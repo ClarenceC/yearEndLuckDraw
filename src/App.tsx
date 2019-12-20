@@ -1,13 +1,13 @@
 
 import React, { Component } from 'react';
 import Luckdraw from '@/containers/Luckdraw'
-import "./App.css";
+import styles from "./App.css";
 
 
 class App extends Component{
   render(){
     return(
-      <div className='main-container'>
+      <div className={styles['main-container']}>
         <Luckdraw />
       </div>
     );
