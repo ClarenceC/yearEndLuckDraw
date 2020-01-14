@@ -37,7 +37,7 @@ class Luckdraw extends PureComponent<LuckdrawPropTypes, LuckdrawStateType> {
     const images = this.importAll(require.context('../../assets/images/Poker/Front/Confused/', false, /\.(gif|png|jpe?g|svg)$/))
     const imagesBiger = this.importAll(require.context('../../assets/images/Poker/Front/ConfusedBiger/', false, /\.(gif|png|jpe?g|svg)$/))
     const imagesPuzzle = this.importAll(require.context('../../assets/images/Poker/Front/Puzzle/', false, /\.(gif|png|jpe?g|svg)$/))
-    const luckPeopleArray:Array<LuckParamsTypes> = Array.from({length: 120}, (item, index:number) => ({
+    const luckPeopleArray:Array<LuckParamsTypes> = Array.from({length: 101}, (item, index:number) => ({
       luckNum: index,
       backPic: "反",
       frontPic: images[`${index}.png`],
