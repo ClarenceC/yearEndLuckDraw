@@ -2,7 +2,8 @@
   position: relative;
   width: 1000px;
   /* height: 634px; */
-  background: url('../../assets/images/App/panle.jpg') no-repeat;
+  /* background: url('../../assets/images/App/panle.jpg') no-repeat; */
+  background-color: #282860;
   background-size: 1000px 700px;
   z-index: 1;
 }
@@ -17,6 +18,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #FFF;
 }
 .poker-panle-mask {
   position: fixed;
